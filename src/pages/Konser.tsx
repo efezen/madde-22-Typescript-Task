@@ -1,12 +1,13 @@
-const Tiyatro = () => {
+import React from "react";
+const Konser = () => {
   return (
     <div className="container">
       <div className="cart">
         <div className="siyah-sol">
           <p>7 Eylül Salı 21:15</p>
         </div>
-        <img src="1.png" />
-        <div className="etiket">TİYATRO</div>
+        <img src="4.png" />
+        <div className="etiket">KONSER</div>
         <div className="metinler">
           <p className="bkm">BKM Yaz Etkinlikleri Zengin Mutfağı</p>
           <p className="konum">Maximum UNIQ Hall</p>
@@ -24,4 +25,4 @@ const Tiyatro = () => {
   );
 };
 
-export default Tiyatro;
+export default Konser;

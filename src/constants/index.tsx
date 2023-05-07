@@ -5,7 +5,16 @@ const pic4 = "4.png"
 const pic5 = "5.png"
 const pic6 = "6.png"
 
-const carts = [
+type CartType = {
+  title: string;
+  konum: string;
+  aciklama: string;
+  img: string;
+  tur: "TİYATRO" | "SİNEMA" | "KONSER" | "STAND UP";
+  tarih: string;
+};
+
+const carts:CartType[] = [
   {
     title: "BKM Yaz Etkinlikleri Zengin Mutfağı",
     konum: "Maximum Uniq Hall",
@@ -52,7 +61,7 @@ const carts = [
     tarih: "7 Eylül Salı 21:15",
   },
   {
-    title: "Sinema Keyfi: Rifkins Festival",
+    title: "Sinema Keyfi: Rifkin's Festival",
     konum: "Maximum Uniq Hall",
     aciklama:
       "1978 yılında ilk kez İstanbul Şehir Tiyatrolarında bu oyunda aşçı Lütfü Usta’yı canlandıran Şener Şen, 40 yıl aradan sonra aynı rolde ve genç bir.... Detaylı Bilgi",
@@ -65,4 +74,5 @@ const carts = [
 
 
 
-export { carts };
+export { carts, CartType };
+

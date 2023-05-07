@@ -1,21 +1,32 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { carts } from "../constants";
 import Takvim from "./Takvim";
+import ControlPointIcon from "@mui/icons-material/ControlPoint";
+import SearchIcon from "@mui/icons-material/Search";
+import CheckIcon from "@mui/icons-material/Check";
 
-const Navbar = () => {
+const Navbar: React.FC = () => {
+  // Arama terimi state'i ve takvimde eklenip eklenmediğine dair state
   const [searchTerm, setSearchTerm] = useState("");
-  const [addedToCalendar, setAddedToCalendar] = useState({});
+  const [addedToCalendar, setAddedToCalendar] = useState<{
+    [key: number]: boolean;
+  }>({});
+
+  // Location hook'u kullanarak hangi sayfada olduğumuzu kontrol etme
   const location = useLocation();
 
-  const handleSearch = (e) => {
+  // Arama terimi değiştiğinde çalışacak fonksiyon
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
   };
 
-  const handleAddToCalendar = (idx) => {
+  // Takvime ekle butonuna tıklandığında çalışacak fonksiyon
+  const handleAddToCalendar = (idx: number) => {
     setAddedToCalendar((prev) => ({ ...prev, [idx]: true }));
   };
 
+  // Filtrelenmiş etkinlikleri alarak kartları render etme
   const filteredCarts = carts
     .filter((cart) =>
       cart.title.toLowerCase().includes(searchTerm.toLowerCase())
@@ -26,6 +37,7 @@ const Navbar = () => {
     );
 
   return (
+    // Navbar bileşeni
     <nav>
       <h1>Etkinlikler</h1>
       <ul>
@@ -48,17 +60,27 @@ const Navbar = () => {
           <Link to={"/cocuk"}>Çocuk</Link>
         </li>
         <li>
-          <input type="search" onChange={handleSearch} placeholder="Arayın..."/>
+          {/* Arama barı */}
+          <div className="search-bar">
+            <SearchIcon />
+            <input
+              type="search"
+              onChange={handleSearch}
+              placeholder="Arayın..."
+            />
+          </div>
         </li>
       </ul>
+
+      {/* Takvim bileşeni ve filtrelenmiş etkinliklerin kartlarının render edilmesi */}
       <div className="container">
-        <Takvim/>
+        <Takvim />
         {filteredCarts.map((cart, idx) => (
           <div className="cart" key={idx}>
             <div className="siyah-sol">
               <p>{cart.tarih}</p>
             </div>
-            <img src={cart.img} alt=""/>
+            <img src={cart.img} alt="" />
             <div className="etiket">{cart.tur}</div>
             <div className="metinler">
               <p className="bkm">{cart.title}</p>
@@ -71,7 +93,17 @@ const Navbar = () => {
               disabled={addedToCalendar[idx]}
               onClick={() => handleAddToCalendar(idx)}
             >
-              {addedToCalendar[idx] ? "Takvimde Eklendi" : "Takvime Ekle"}
+              {addedToCalendar[idx] ? (
+                <>
+                  <CheckIcon />
+                  <span>Takvimde Eklendi</span>
+                </>
+              ) : (
+                <>
+                  <ControlPointIcon />
+                  <span>TakvimeEkle</span>
+                </>
+              )}
             </button>
           </div>
         ))}
