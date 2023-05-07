@@ -32,4 +32,4 @@ To Visit App:
 
   - This is a hiring task project.
   - The project was built by vite.
-  - This project was built by HTML, CSS, Javascript, React, React Hooks. (i.e useContext, useState, useEffect)
+  - This project was built by HTML, CSS, Javascript, React, React Hooks. (i.e  useState, useEffect)
